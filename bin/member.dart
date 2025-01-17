@@ -9,6 +9,6 @@ class Member {
 
   Member({
     required this.name,
-    required this.memberType,
+    this.memberType = MemberType.casual,
   });
 }

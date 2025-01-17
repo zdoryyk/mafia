@@ -18,18 +18,18 @@ final List<BattleLocation> battleLocations = [
 ];
 
 final List<Member> availableMembers = [
-  Member(name: 'John', memberType: MemberType.casual),
-  Member(name: 'Mike', memberType: MemberType.casual),
-  Member(name: 'Sarah', memberType: MemberType.casual),
-  Member(name: 'Fico', memberType: MemberType.casual),
-  Member(name: 'Grisha', memberType: MemberType.casual),
+  Member(name: 'John'),
+  Member(name: 'Mike'),
+  Member(name: 'Sarah'),
+  Member(name: 'Fico'),
+  Member(name: 'Grisha')
 ];
 
 final List<Member> membersForSecondClan = [
-  Member(name: 'John', memberType: MemberType.casual),
-  Member(name: 'Misha', memberType: MemberType.casual),
-  Member(name: 'Mike', memberType: MemberType.casual),
-  Member(name: 'Sarah', memberType: MemberType.casual),
+  Member(name: 'John'),
+  Member(name: 'Misha'),
+  Member(name: 'Mike'),
+  Member(name: 'Sarah'),
   Member(name: 'Don', memberType: MemberType.boss),
 ];
 
