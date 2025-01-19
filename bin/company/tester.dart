@@ -11,6 +11,18 @@ class Tester extends Worker {
 
   @override
   void work() {
-    print('Testing hello world!');
+    if (motivation >= 60) {
+      print('testing');
+    } else if (motivation >= 30 && motivation <= 59) {
+      print('needs coffee..');
+    } else {
+      print('tired...');
+    }
+  }
+
+  @override
+  void increaseMotivation() {
+    print('lets retest');
+    setMotivation = 30;
   }
 }

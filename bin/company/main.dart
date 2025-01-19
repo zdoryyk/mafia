@@ -1,8 +1,5 @@
 import 'company.dart';
-import 'worker.dart';
-import 'programmer.dart';
-import 'designer.dart';
-import 'tester.dart';
+import 'workers.dart';
 
 void main() {
   final List<Worker> workers = [
@@ -25,6 +22,15 @@ void main() {
         salary: '1200',
         posistion: 'Junior Web Designer'),
   ];
-
-  final Company google = Company(title: 'Google', workers: workers);
+  final Worker manager = Manager(
+    workers: workers,
+    name: 'Denis',
+    age: '27',
+    sex: Sex.male,
+    salary: '2500\$',
+    posistion: 'PM',
+  );
+  final Company google =
+      Company(title: 'Google', workers: [manager, ...workers]);
+  manager.increaseMotivation();
 }
