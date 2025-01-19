@@ -42,11 +42,9 @@ class Clan with AbleToAdd {
   }
 
   void addMemberToClan(Member memberToAdd) {
-    if (memberToAdd.region != region && region != Region.irish) {
-      print('Только Ирландцы могут добавлять всех жителей!');
-      return;
+    if(memberToAdd.region == region || ableToAddAllMembers(region)){
+      members.add(memberToAdd);
     }
-    members.add(memberToAdd);
   }
 
   void addMembersToClan(List<Member> membersToAdd) {
