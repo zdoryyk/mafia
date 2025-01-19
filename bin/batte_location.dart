@@ -2,19 +2,22 @@ import 'clan.dart';
 import 'member.dart';
 import 'dart:math';
 import 'data.dart';
+import 'fight_console_utils.dart';
 
 final random = Random();
 
-class BattleLocation {
+class BattleLocation with FightConsoleUtils {
   final String name;
   Clan? attackers;
   final Clan guard;
   final int money;
+  final Region region;
 
   BattleLocation({
     required this.name,
     this.attackers,
     required this.money,
+    required this.region,
   }) : guard = southLondonClan;
 
   bool fight() {
@@ -23,44 +26,46 @@ class BattleLocation {
       return false;
     }
 
-    print(
-        'Место битвы $name, Аттакующие ${attackers!.name}, На защите ${guard.name}');
+    logBattleLocation(name, attackers!, guard);
 
     final shuffledAttackers = List.of(attackers!.members)..shuffle(random);
     final shuffledGuards = List.of(guard.members)..shuffle(random);
 
-    int attackerScore = 0;
-    int guardScore = 0;
+    int attackerIndex = 0;
+    int guardIndex = 0;
 
-    for (int i = 0;
-        i < shuffledAttackers.length && i < shuffledGuards.length;
-        i++) {
-      final attacker = shuffledAttackers[i];
-      final defender = shuffledGuards[i];
+    while (attackerIndex < shuffledAttackers.length &&
+        guardIndex < shuffledGuards.length) {
+      final attacker = shuffledAttackers[attackerIndex];
+      final defender = shuffledGuards[guardIndex];
 
       bool attackerWins = _fightBetweenMembers(attacker, defender);
 
       if (attackerWins) {
-        attackerScore++;
+        guardIndex++;
       } else {
-        guardScore++;
+        attackerIndex++;
       }
     }
 
-    final winner = attackerScore > guardScore ? attackers : guard;
+    final winner = attackerIndex < shuffledAttackers.length ? attackers : guard;
+
     print('Победила команда: ${winner!.name}');
 
     if (winner == attackers) {
-      print('${attackers!.name} забрали $money денег!\n');
+      print('${attackers!.name} забрали $money баксов!\n');
       return true;
     }
 
-    print('${guard.name} защитили свои $money денег!\n');
+    print('${guard.name} защитили свои $money баксов!\n');
     return false;
   }
 
   bool _fightBetweenMembers(Member attacker, Member defender) {
-    return random.nextInt(100) < _calculateChanceToWin(attacker, defender);
+    bool isAttackerWin =
+        random.nextInt(100) < _calculateChanceToWin(attacker, defender);
+    logCurrentFight(attacker, defender, isAttackerWin);
+    return isAttackerWin;
   }
 
   int _calculateChanceToWin(Member attacker, Member defender) {
