@@ -3,45 +3,35 @@ import 'member.dart';
 import 'batte_location.dart';
 
 class MafiaGame {
-  final Clan northLondonClan;
-  List<Member>? members;
+  final Clan mainClan;
 
-  MafiaGame({
-    this.members,
-  }) : northLondonClan = Clan(
-          name: 'North London Mafia',
-          members: [Member(name: 'Don', memberType: MemberType.boss)],
-        );
+  MafiaGame({required this.mainClan});
 
   void printInfoAboutClan() {
     print('-------------------------');
-    print('Вы глава мафии ${northLondonClan.name}');
-    if (northLondonClan.members.isEmpty) {
+    print('Вы глава мафии ${mainClan.name}');
+    if (mainClan.members.isEmpty) {
       print('Пока вы не имеете участников');
     } else {
       print('Участники группы:');
-      for (var member in northLondonClan.members) {
+      for (var member in mainClan.members) {
         print(
             '- ${member.name} (${member.memberType == MemberType.boss ? 'Boss' : 'Casual'})');
       }
     }
-    print('Баланс клана: ${northLondonClan.money}');
+    print('Баланс клана: ${mainClan.money}');
     print('-------------------------\n');
   }
 
   void makeRacket(BattleLocation location) {
-    location.attackers = northLondonClan;
-    bool isWinner = location.fight();
-    if (isWinner) {
-      northLondonClan.addMoney(location.money);
-    }
+    mainClan.makeRacket(location);
   }
 
   void addMemberToClan(Member memberToAdd) {
-    northLondonClan.members.add(memberToAdd);
+    mainClan.addMemberToClan(memberToAdd);
   }
 
   void addMembersToClan(List<Member> members) {
-    northLondonClan.members.addAll(members);
+    mainClan.addMembersToClan(members);
   }
 }
