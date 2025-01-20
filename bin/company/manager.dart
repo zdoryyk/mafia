@@ -1,10 +1,7 @@
 import 'worker.dart';
 
 class Manager extends Worker {
-  final List<Worker> workers;
-
   Manager({
-    required this.workers,
     required super.name,
     required super.age,
     required super.sex,
@@ -15,11 +12,12 @@ class Manager extends Worker {
   @override
   void increaseMotivation() {
     print('Okey, guys its time to work');
-    for (var worker in workers) {
-      if (worker is! Manager) {
-        worker.increaseMotivation();
-      }
-    }
+    setMotivation = 20;
+  }
+
+  void motivateWorker(Worker worker) {
+    print('Окей, ${worker.name}, time to work!');
+    worker.increaseMotivation();
   }
 
   @override
