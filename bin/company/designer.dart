@@ -11,6 +11,18 @@ class Designer extends Worker {
 
   @override
   void work() {
-    print('Designing..');
+    if (motivation >= 60) {
+      print('Figma done');
+    } else if (motivation >= 30 && motivation <= 59) {
+      print('still working on it');
+    } else {
+      print('tired..');
+    }
+  }
+
+  @override
+  void increaseMotivation() {
+    print('Okey, lets redesign it');
+    setMotivation = 30;
   }
 }
